@@ -7,6 +7,14 @@ variable "ami_name" {
   description = "Name for the AMI"
   type        = string
 }
+variable "instances" {
+  description = "List of instances to create"
+  type = list(object({
+    instance_type = string
+    subnet_index  = number
+    user_data     = string
+  }))
+}
 
 variable "instance_type" {
   description = "Instance type for the base instance"
@@ -47,5 +55,6 @@ variable "subnets" {
     availability_zone = string
   }))
 }
+
 
 

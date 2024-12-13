@@ -9,14 +9,6 @@ module "networking" {
   tags     = var.tags
 }
 
-locals {
-  instances = [
-    { instance_type = "t3.micro", subnet_id = module.networking.subnet_ids[0], user_data = "userdata.sh" },
-    { instance_type = "t3.micro", subnet_id = module.networking.subnet_ids[1], user_data = "userdata1.sh" },
-    { instance_type = "t3.micro", subnet_id = module.networking.subnet_ids[2], user_data = "userdata2.sh" }
-  ]
-}
-
 module "compute" {
   source            = "./modules/ec2"
   base_ami          = var.base_ami
@@ -24,7 +16,8 @@ module "compute" {
   instance_type     = var.instance_type
   user_data         = var.user_data
   security_group_id = module.networking.security_group_id
-  instances         = local.instances
+  subnet_ids        = module.networking.subnet_ids
+  instances         = var.instances
   tags              = var.tags
 }
 

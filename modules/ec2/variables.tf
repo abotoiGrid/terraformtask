@@ -18,11 +18,16 @@ variable "user_data" {
   type        = string
 }
 
+variable "subnet_ids" {
+  description = "List of subnet IDs"
+  type        = list(string)
+}
+
 variable "instances" {
   description = "List of instances to create"
   type = list(object({
     instance_type = string
-    subnet_id     = string
+    subnet_index  = number
     user_data     = string
   }))
 }

@@ -17,7 +17,7 @@ resource "aws_instance" "web_instances" {
 
   ami                    = aws_ami_from_instance.ami.id
   instance_type          = each.value.instance_type
-  subnet_id              = each.value.subnet_id
+  subnet_id              = var.subnet_ids[each.value.subnet_index]
   vpc_security_group_ids = [var.security_group_id]
   user_data              = base64encode(file("${path.root}/scripts/${each.value.user_data}"))
   tags                   = merge(var.tags, { Name = "webserver${each.key + 1}" })
