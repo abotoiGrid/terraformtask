@@ -19,8 +19,8 @@ variable "user_data" {
 }
 
 variable "instances" {
-  description = "Details for additional webserver instances"
-  type = map(object({
+  description = "List of instances to create"
+  type = list(object({
     instance_type = string
     subnet_id     = string
     user_data     = string
@@ -29,26 +29,6 @@ variable "instances" {
 
 variable "security_group_id" {
   description = "Security group ID for the instances"
-  type        = string
-}
-
-variable "subnet_ids" {
-  description = "Subnet IDs for the load balancer"
-  type        = list(string)
-}
-
-variable "vpc_id" {
-  description = "VPC ID for the resources"
-  type        = string
-}
-
-variable "lb_name" {
-  description = "Name of the application load balancer"
-  type        = string
-}
-
-variable "tg_name" {
-  description = "Name of the target group"
   type        = string
 }
 
